@@ -185,7 +185,7 @@ function seo(pg,p,t,d){
  const url=SITE?SITE+'/'+(DIR[p]||''):'',idb=url||'',org=(SITE?SITE+'/':'')+'#entreprise';
  const head=document.head,set=(sel,mk,val)=>{let e=head.querySelector(sel);if(!val){if(e)e.remove();return}if(!e){e=document.createElement('meta');mk(e);head.appendChild(e)}e.setAttribute('content',val)};
  const nm=n=>e=>e.name=n,pr=n=>e=>e.setAttribute('property',n);
- const img=SITE?SITE+'/assets/img/'+(OGI[pg]||'logo-fluides-co.png'):'';
+ const img=SITE?SITE+'/assets/img/'+(OGI[pg]||'og-default.png'):'';
  set('meta[name="robots"]',nm('robots'),'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1');
  set('meta[name="theme-color"]',nm('theme-color'),'#10302f');
  set('meta[property="og:site_name"]',pr('og:site_name'),'Fluides & Co');
@@ -204,7 +204,7 @@ function seo(pg,p,t,d){
   hasOfferCatalog:{'@type':'OfferCatalog',name:'Prestations',itemListElement:['Plomberie','Chauffage','Climatisation'].map(n=>({'@type':'Offer',itemOffered:{'@type':'Service',name:n}}))},
   aggregateRating:{'@type':'AggregateRating',ratingValue:'4.9',bestRating:'5',worstRating:'1',reviewCount:String(RV.length)},
   sameAs:[FB,TRAVAUX_URL].filter(Boolean)};
- if(SITE){ORG.url=SITE+'/';ORG.logo={'@type':'ImageObject',url:SITE+'/assets/img/logo-fluides-co.png'};ORG.image=SITE+'/assets/img/'+(OGI.home)}
+ if(SITE){ORG.url=SITE+'/';ORG.logo={'@type':'ImageObject',url:SITE+'/assets/img/icon-512.png',width:512,height:512};ORG.image=SITE+'/assets/img/'+(OGI.home)}
  const G=[ORG];
  if(SITE)G.push({'@type':'WebSite','@id':SITE+'/#website',url:SITE+'/',name:'Fluides & Co',inLanguage:'fr-FR',publisher:{'@id':org}});
  const wp={'@type':pg==='contact'?'ContactPage':pg==='about'?'AboutPage':'WebPage','@id':(idb||'')+'#webpage',name:t,description:d,inLanguage:'fr-FR',about:{'@id':org}};
