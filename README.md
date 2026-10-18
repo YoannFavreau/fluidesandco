@@ -85,3 +85,10 @@ Le build met alors à jour, sur toutes les pages : la balise canonique, `hreflan
 Tant que `site` est vide, ces éléments restent en mode « à compléter ». Laisser `facebook` vide masque simplement le lien.
 
 Après la mise en ligne : déclarer le site dans Google Search Console (envoyer `sitemap.xml`), et vérifier la fiche Google Business Profile avec le même nom, adresse et téléphone que dans le pied de page.
+
+## Logo et icônes
+
+- `assets/img/logo-fluides-co.png` : logo noir (en-tête, il s'inverse tout seul en mode sombre) ; `logo-fluides-co-blanc.png` : version blanche
+- `favicon.ico`, `apple-touch-icon.png`, `assets/img/icon-192.png`, `icon-512.png`, `site.webmanifest` : icône « F » blanche sur fond vert (onglet du navigateur, résultats Google, écran d'accueil du téléphone)
+- `assets/img/og-default.png` : image de partage par défaut (Facebook, LinkedIn)
+Pour changer de logo, remplacer ces fichiers en gardant les mêmes noms, puis relancer le build.
