@@ -381,3 +381,13 @@ a.card:hover{border-color:var(--copper);box-shadow:none}
 .ck-b .btn::after{display:none}.ck-b .btn.ghost{background:transparent;color:var(--ink);--bc:var(--ink)}
 @media (max-width:560px){.ck-b{width:100%}.ck-b .btn{flex:1}}
 .ck-link{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer}
+
+
+/* ===== Cahier des charges (octobre) ===== */
+.h1home{font-size:clamp(2.1rem,5vw,3.4rem)}
+.hero p{max-width:60ch}.hero .lead{max-width:56ch}
+.micro{margin:14px 0 0;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.concl{margin:28px auto 20px;max-width:60ch;font-weight:500}
+.urg{grid-template-columns:repeat(auto-fit,minmax(128px,1fr))}
+
+.cl{white-space:normal}
