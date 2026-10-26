@@ -58,7 +58,8 @@ async function writeSeoFiles(siteDir, cfg) {
   const placeholder = !cfg.site;
   const site = (cfg.site || 'https://www.VOTRE-DOMAINE.fr').replace(/\/+$/, '');
   const today = new Date().toISOString().slice(0, 10);
-  const dirs = [...PAGES.map((p) => p[1]), ...STATIC_PAGES];
+  const legalTodo = (await readFile(path.join(siteDir, 'mentions-legales', 'index.html'), 'utf8').catch(() => '')).includes('class="todo"');
+  const dirs = [...PAGES.map((p) => p[1]), ...STATIC_PAGES.filter((d) => !(legalTodo && d === 'mentions-legales'))];
   const urls = dirs.map((d) => `  <url><loc>${site}/${d ? d + '/' : ''}</loc><lastmod>${today}</lastmod></url>`).join('\n');
   await writeFile(path.join(siteDir, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n${placeholder ? '<!-- À COMPLÉTER : renseigner "site" dans build/site.config.json puis relancer le build -->\n' : ''}<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`);
   await writeFile(path.join(siteDir, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /build/\n\n# Moteurs de recherche et assistants IA : accès autorisé au contenu public\nUser-agent: GPTBot\nAllow: /\nUser-agent: OAI-SearchBot\nAllow: /\nUser-agent: ChatGPT-User\nAllow: /\nUser-agent: ClaudeBot\nAllow: /\nUser-agent: Claude-SearchBot\nAllow: /\nUser-agent: PerplexityBot\nAllow: /\nUser-agent: Google-Extended\nAllow: /\n\n${placeholder ? '# À COMPLÉTER : renseigner "site" dans build/site.config.json puis relancer le build\n' : ''}Sitemap: ${site}/sitemap.xml\n`);
@@ -97,7 +98,7 @@ export async function build(puppeteer, launchOptions, siteDir) {
     const snap = async (dir) => {
       const page = await browser.newPage();
       await page.setViewport({ width: 1280, height: 900 });
-      await page.evaluateOnNewDocument((c) => { window.FC = c; }, cfg);
+      await page.evaluateOnNewDocument((c) => { window.FC = c; }, { ...cfg, build: new Date().toISOString() });
       page.on('pageerror', (e) => errors.push(`${dir || '/'} : ${e.message}`));
       page.on('requestfailed', (r) => errors.push(`${dir || '/'} : ressource introuvable ${r.url()}`));
       page.on('response', (r) => { if (r.status() >= 400) errors.push(`${dir || '/'} : ${r.status()} ${r.url()}`); });
